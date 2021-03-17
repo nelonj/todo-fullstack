@@ -3,6 +3,7 @@ import './App.css';
 import {ListItem} from './components/model'
 
 interface IItem {
+  id: number,
   description: string
 }
 
@@ -46,10 +47,10 @@ function App() {
         type='text' 
         placeholder='add item' 
         onChange={e => setItem(e.target.value)}></input>
-      <button onClick={clickHandler} 
-      > ADD </button>
+      <button 
+        onClick={clickHandler}> ADD </button>
 
-      <ol> {list.map((element, index) => <ListItem {...element} key={index}/>)}</ol>
+      <ol> {list.map((element, index) => <ListItem {...element}/>)}</ol>
     </div>
   );
 }
