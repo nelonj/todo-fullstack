@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import {ListItem} from './components/model'
 
 interface IItem {
   description: string
@@ -11,11 +12,21 @@ function App() {
   const [list, setList] = useState(emptyList)
   const [item, setItem] = useState('')
   
+  useEffect(() => {
+    fetch("https://localhost:4000/todos").then(
+
+    )
+  }, [item]); //post
+  
+  
   return (
     <div className="App">
       <h1> My ToDo List</h1>
       
-      <input type='text' onChange={e => setItem(e.target.value)}></input>
+      <input 
+        type='text' 
+        placeholder='add item' 
+        onChange={e => setItem(e.target.value)}></input>
       <button onClick={() => {
         const cloneList: IItem[] = [...list]
         cloneList.push({description: item})
@@ -27,18 +38,5 @@ function App() {
   );
 }
 
-function ListItem(props: IItem) {
-  const [completion, setCompletion] = useState(false)
-  console.log(props.description, completion)
-  
-  return (
-    <li> {props.description} 
-      <input type='checkbox' onChange={() => {if (completion === true) {setCompletion(false)} else {setCompletion(true)}}}></input>
-      <button onClick={() => console.log('edited')}> EDIT </button> 
-      <button onClick={() => console.log('deleted')}> DELETE </button>
-    </li>
-    
-  )
-}
 
 export default App;
